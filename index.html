@@ -102,6 +102,59 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    let consoleLogButton = document.querySelectorAll("section button");
+    for(let i = 0;i < consoleLogButton.length;i++){
+      console.log(consoleLogButton[i].innerHTML);
+      consoleLogButton[i].addEventListener('click',() => {
+      if(consoleLogButton[i].innerHTML=="Console Log"){
+          console.log("console log");
+      }
+      if(consoleLogButton[i].innerHTML=="Console Error"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="Console Count"){
+      
+      }
+      if(consoleLogButton[i].innerHTML=="Console Warn"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="Console Assert"){
+        
+      }
+      if(consoleLogButton[i].innerHTML=="Console Clear"){
+        
+      }
+      if(consoleLogButton[i].innerHTML=="Console Dir"){
+        
+      }
+      if(consoleLogButton[i].innerHTML=="Console dirxml"){
+        
+      }
+      if(consoleLogButton[i].innerHTML=="Console Group Start"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="Console Group End"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="Console Table"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="Start Timer"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="End Timer"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="Console Trace"){
+
+      }
+      if(consoleLogButton[i].innerHTML=="Trigger a Global Error"){
+
+      }
+      })
+    }
+
+    
   </script>
 </body>
 
