@@ -86,16 +86,38 @@
       <button>Trigger a Global Error</button>
     </section>
   </main>
-
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "1ab0dc91a4d44f659980299b3466723d"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+  <script>
+    class InputError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "ValidationError";
+      }
+    }
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
+      try{
       e.preventDefault();
       let output = document.querySelector('output');
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
+      if(isNaN(firstNum) || isNaN(secondNum)){
+          throw new InputError("input is not a number");
+      }
       output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      }
+      catch(err){
+          console.error(err.message);
+      }finally{
+          console.log("Calculator is not working properly.");
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -107,54 +129,66 @@
       console.log(consoleLogButton[i].innerHTML);
       consoleLogButton[i].addEventListener('click',() => {
       if(consoleLogButton[i].innerHTML=="Console Log"){
-          console.log("console log");
+        let console1 = document.querySelector("#error-btns");
+        let consoleLogText = console1.querySelector('button');
+        console.log(consoleLogText.innerHTML);
       }
       if(consoleLogButton[i].innerHTML=="Console Error"){
-
+        console.error("this is an error");
       }
       if(consoleLogButton[i].innerHTML=="Console Count"){
-      
+        console.count();
       }
       if(consoleLogButton[i].innerHTML=="Console Warn"){
-
+        console.warn("youve been warned");
       }
       if(consoleLogButton[i].innerHTML=="Console Assert"){
-        
+        const happy = "happy";
+        const sad = "sad";
+        const message = "happy and sad are not equal";
+        console.assert(happy==sad,{happy,sad,message});
       }
       if(consoleLogButton[i].innerHTML=="Console Clear"){
-        
+        console.clear();
       }
       if(consoleLogButton[i].innerHTML=="Console Dir"){
-        
+        console.dir(consoleLogButton);
       }
       if(consoleLogButton[i].innerHTML=="Console dirxml"){
-        
+        console.dirxml(consoleLogButton);
       }
       if(consoleLogButton[i].innerHTML=="Console Group Start"){
-
+        const label = "important console calls";
+        console.group(label);
       }
       if(consoleLogButton[i].innerHTML=="Console Group End"){
-
+        const label = "important console calls";
+        console.groupEnd(label);
       }
       if(consoleLogButton[i].innerHTML=="Console Table"){
-
+        var emotions = [{hello: 'hello'},{happy: 'happy'}];
+        console.table(emotions);
       }
       if(consoleLogButton[i].innerHTML=="Start Timer"){
-
+        console.time();
       }
       if(consoleLogButton[i].innerHTML=="End Timer"){
-
+        console.timeEnd();
       }
       if(consoleLogButton[i].innerHTML=="Console Trace"){
-
+        console.trace();
       }
       if(consoleLogButton[i].innerHTML=="Trigger a Global Error"){
 
       }
       })
     }
-
-    
+    consoleLogButton[14].addEventListener('click', () => {
+      boom; //Bad Code on purpose
+    });
+    window.onerror = function(message, url, linenumber) {
+	    console.log('JavaScript error: ' + message + ' on line ' + linenumber + ' for ' + url);
+    }
   </script>
 </body>
 
